@@ -10,9 +10,9 @@ weather_token = config.TOKEN_OWM
 
 def do_start(bot: Bot, update: Update):
     bot.send_message(
-        user_id=update.message.chat_id,
-        text='Привет! Я бот погоды, напиши мне свой город или  его индекс и я покажу тебе погоду на данный момент :) И еще, вводи название своего города латинницей, я пока что плохо понимаю по-русски'
-        )
+        chat_id=update.message.chat_id,
+        text='Привет! Я бот погоды, напиши мне свой город или  его индекс и я покажу тебе погоду на данный момент :) И еще, вводи название своего города латинницей, я пока что плохо понимаю по-русски',
+    )
 
 
 def show_weather(bot: Bot, update: Update):
@@ -24,11 +24,10 @@ def show_weather(bot: Bot, update: Update):
     wind = get_weather.get_wind()['speed']
     humidity = get_weather.get_humidity()['humidity']
     description = get_weather.get_detailed_status()
-    bot.send_message(chat_id=update.message.chat_id,
-                     text='В городе' + str(city) + ' сейчас ' + str(description) + '\n' +
-                          'Температура: ' + str(temperature) + ' ℃\n' +
-                          'Скорость ветра: ' + str(wind) + ' м/с\n' +
-                          'Влажность: ' + str(humidity) + ' %', )
+    bot.send_message(
+        chat_id=update.message.chat_id,
+        text=f'В городе{str(city)} сейчас {str(description)}\nТемпература: {str(temperature)} ℃\nСкорость ветра: {str(wind)} м/с\nВлажность: {str(humidity)} %',
+    )
 
 
 def main():
