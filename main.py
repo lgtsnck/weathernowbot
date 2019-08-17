@@ -5,6 +5,8 @@ from telegram import InlineKeyboardMarkup
 from telegram.ext import Updater
 from telegram.ext import CallbackQueryHandler
 from telegram.ext import CommandHandler
+from telegram.ext import MessageHandler
+from telegram.ext import Filters
 import pyowm
 import config
 
@@ -109,6 +111,14 @@ def show_weather(bot: Bot, update: Update, args):
         )
 
 
+def unknown_command(bot: Bot, update: Update):
+    bot.send_message(
+        chat_id=update.message.chat_id,
+        text="Я такой команды не знаю, и ничего сделать не могу, у меня лапки 🌝\n"
+             "Список доступных команд есть в меню 👇🏻"
+    )
+
+
 def main():
     bot = Bot(
         token=config.TOKEN_TG,
@@ -122,12 +132,14 @@ def main():
     help_handler = CommandHandler("help", help_message)
     change_language_handler = CommandHandler("change_language", change_language)
     show_weather_handler = CommandHandler("show_weather", show_weather, pass_args=True)
+    unknown_command_handler = MessageHandler(Filters.command, unknown_command)
     keyboard_callback = CallbackQueryHandler(callback=keyboard_callback_handler)
 
     updater.dispatcher.add_handler(start_handler)
     updater.dispatcher.add_handler(help_handler)
     updater.dispatcher.add_handler(change_language_handler)
     updater.dispatcher.add_handler(show_weather_handler)
+    updater.dispatcher.add_handler(unknown_command_handler)
     updater.dispatcher.add_handler(keyboard_callback)
 
     updater.start_polling()
