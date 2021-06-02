@@ -1,6 +1,11 @@
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # Токен от BotFather
-TOKEN_TG = "673839593:AAHkpEIKHQz4DSCniL9m4Ny_B5Q9vUHDN-s"
+TOKEN_TG = os.getenv("TOKEN_TG")
 # Токен от OpenWeatherMap
-TOKEN_OWM = "30f5b41f4b3da3d8068c73dbdf02deba"
-# Урла для обхода РКН
-TG_API_URL = "https://telegg.ru/orig/bot"
+TOKEN_OWM = os.getenv("TOKEN_OWM")
+# Урла API Telegram, до этого было зеркало
+TG_API_URL = "https://api.telegram.org/bot"
