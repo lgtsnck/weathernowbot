@@ -2,6 +2,9 @@
 Greeting будет при рестарте бота :)
 """
 
+
+FIRST_GREETING = "Hi {}! Let's do the first setup 👇🏻"
+
 GREETING = """"Hi again {}! I'm weather bot, list of available commands is in the menu.
 I only know how to show the weather at the moment 😉
 Let's do the setup 👇🏻 (you can skip it if everything is OK)"""
@@ -20,3 +23,5 @@ Humidity: {} %"""
 
 UNKNOWN_COMMAND = """I don't know such a command.
 The list of available commands is in the menu."""
+
+LANG_SELECT_SUCCESS = """Language successfully selected 🇬🇧"""
